@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barisan Aritmatika</title>
+
+    <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(135deg, #fff7e6, #ffe0b2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      .container {
+        width: 90vw;
+        max-width: 720px;
+        background: #ffffff;
+        padding: 28px;
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      /* ===== Judul ===== */
+      .title {
+        font-size: 22px;
+        text-align: center;
+        font-weight: bold;
+        color: #ff8c00;
+      }
+
+      /* ===== Input a & b ===== */
+      .equation {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+      }
+
+      .equation label {
+        font-size: 20px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      .equation-input {
+        width: 60px;
+        height: 42px;
+        margin-left: 6px;
+        text-align: center;
+        font-size: 20px;
+        border: 3px solid #ffa726;
+        border-radius: 10px;
+        outline: none;
+      }
+
+      .equation-input:focus {
+        background-color: #fff3cd;
+      }
+
+      /* ===== Tombol ===== */
+      .btn-count {
+        align-self: center;
+        padding: 14px 26px;
+        font-size: 18px;
+        font-weight: bold;
+        background: #ff9800;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-count:hover {
+        transition: 300ms;
+        background: #f57c00;
+      }
+
+      /* ===== Barisan ===== */
+      .barisan-section {
+        background: #fff8e1;
+        padding: 16px;
+        border-radius: 14px;
+      }
+
+      .barisan-title {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        color: #e65100;
+      }
+
+      .barisan-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .term {
+        width: 50px;
+        height: 45px;
+        background: #ffffff;
+        border: 3px solid #ffb74d;
+        border-radius: 10px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .arrow {
+        font-size: 24px;
+        user-select: none;
+      }
+
+      /* ===== Rumus ===== */
+      .formula {
+        margin-top: 12px;
+        padding: 10px;
+        background: #e3f2fd;
+        border-radius: 10px;
+        font-size: 18px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      /* ===== Jumlah Deret ===== */
+      .sum-section {
+        background: #f1f8e9;
+        padding: 16px;
+        border-radius: 14px;
+        font-size: 17px;
+      }
+
+      .math {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        Tentukan suku pertama (<i>a</i>) dan beda (<i>b</i>) untuk barisan
+        aritmatika:
+      </div>
+
+      <div class="equation">
+        <label>
+          <i>a</i> =
+          <input id="inputA" class="equation-input" value="0" type="number" />
+        </label>
+
+        <label>
+          <i>b</i> =
+          <input id="inputB" class="equation-input" value="0" type="number" />
+        </label>
+      </div>
+
+      <button class="btn-count" id="btnCount">Hitung Baris Aritmatika</button>
+
+      <div class="barisan-section">
+        <div class="barisan-title">Barisan Aritmatika:</div>
+
+        <div class="barisan-row" id="answerRow">
+          <button class="arrow" id="back">⬅️</button>
+          <div class="term"></div>
+          <div class="term"></div>
+          <div class="term"></div>
+          <div class="term"></div>
+          <div class="term"></div>
+          <div class="term"></div>
+          <div class="term"></div>
+          <div class="term"></div>
+          <button class="arrow" id="next">➡️</button>
+        </div>
+
+        <div class="formula">
+          <i>U</i><sub>n</sub> = <i>a</i> + (n − 1)<i>b</i>
+        </div>
+      </div>
+
+      <div class="sum-section">
+        Jumlah <i>n</i> suku pertama dari deret aritmatika.
+        <div class="math">
+          <div>
+            <i>S</i><sub>n</sub> =
+            <span>½ <i>n(a + U<sub>n</sub>)</i></span>
+          </div>
+          atau
+          <div>
+            <i>S</i><sub>n</sub> =
+            <span>½ <i>n(2a + (n − 1)b)</i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const inputA = document.getElementById("inputA");
+      const inputB = document.getElementById("inputB");
+      const btnCount = document.getElementById("btnCount");
+      const answerRow = document.getElementById("answerRow");
+      const terms = answerRow.querySelectorAll(".term");
+
+      const btnBack = document.getElementById("back");
+      const btnNext = document.getElementById("next");
+
+      const TOTAL = 25;
+      const VISIBLE = 8;
+
+      const result = [];
+      let startIndex = 0;
+
+      const render = () => {
+        for (let i = 0; i < VISIBLE; i++) {
+          const index = startIndex + i;
+          const term = terms[i];
+
+          term.innerHTML = "";
+
+          if (result[index] !== undefined) {
+            const value = document.createElement("div");
+            value.textContent = result[index];
+            value.style.fontSize = "18px";
+            value.style.fontWeight = "bold";
+
+            const label = document.createElement("span");
+            label.className = "index";
+            label.textContent = `(${index + 1})`;
+            label.style.position = "absolute";
+            label.style.bottom = 0;
+            label.style.right = 0;
+            label.style.color = "#e65100";
+            label.style.fontSize = "12px";
+
+            term.appendChild(value);
+            term.appendChild(label);
+          }
+        }
+
+        btnBack.disabled = startIndex === 0;
+        btnNext.disabled = startIndex + VISIBLE >= result.length;
+
+        btnBack.style.opacity = btnBack.disabled ? 0.4 : 1;
+        btnNext.style.opacity = btnNext.disabled ? 0.4 : 1;
+      };
+
+      btnCount.addEventListener("click", () => {
+        const valueA = Number(inputA.value);
+        const valueB = Number(inputB.value);
+
+        if (valueA == 0 || valueB == 0) {
+          return alert("Tidak boleh diisi 0");
+        }
+
+        for (let i = 1; i <= 25; i++) {
+          result.push(valueA + (i - 1) * valueB);
+        }
+
+        render();
+      });
+
+      btnNext.addEventListener("click", () => {
+        if (startIndex + VISIBLE < result.length) {
+          startIndex++;
+          render();
+        }
+      });
+
+      btnBack.addEventListener("click", () => {
+        if (startIndex > 0) {
+          startIndex--;
+          render();
+        }
+      });
+    </script>
+  </body>
+</html>
