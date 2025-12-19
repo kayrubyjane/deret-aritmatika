@@ -117,7 +117,8 @@
       }
 
       .term {
-        width: 50px;
+        width: fit-content;
+        min-width: 50px;
         height: 45px;
         background: #ffffff;
         border: 3px solid #ffb74d;
@@ -126,6 +127,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+
+      .term1 {
+        width: 100px;
+        height: 45px;
+        background: #ffffff;
+        border: 3px solid #ffb74d;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
       }
 
       .arrow {
@@ -211,7 +223,10 @@
       </div>
 
       <div class="sum-section">
-        Jumlah <i>n</i> suku pertama dari deret aritmatika.
+        <div style="display: flex; align-items: center; gap: 0.2em">
+          <span> Jumlah <i>n</i> suku pertama dari deret aritmatika. </span>
+          <input class="term1" id="sn" disabled readonly />
+        </div>
         <div class="math">
           <div>
             <i>S</i><sub>n</sub> =
@@ -232,6 +247,7 @@
       const btnCount = document.getElementById("btnCount");
       const answerRow = document.getElementById("answerRow");
       const terms = answerRow.querySelectorAll(".term");
+      const sn = document.getElementById("sn");
 
       const btnBack = document.getElementById("back");
       const btnNext = document.getElementById("next");
@@ -277,7 +293,7 @@
 
       btnCount.addEventListener("click", () => {
         result = [];
-        
+
         const valueA = Number(inputA.value);
         const valueB = Number(inputB.value);
         const valueN = Number(inputN.value);
@@ -289,6 +305,8 @@
         for (let i = 1; i <= valueN; i++) {
           result.push(valueA + (i - 1) * valueB);
         }
+
+        sn.value = (valueN / 2) * (2 * valueA + (valueN - 1) * valueB);
 
         render();
       });
