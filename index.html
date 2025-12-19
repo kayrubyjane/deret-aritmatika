@@ -166,8 +166,8 @@
   <body>
     <div class="container">
       <div class="title">
-        Tentukan suku pertama (<i>a</i>), beda (<i>b</i>) dan jumlah suku (<i>n</i>) untuk barisan
-        aritmatika:
+        Tentukan suku pertama (<i>a</i>), beda (<i>b</i>) dan jumlah suku
+        (<i>n</i>) untuk barisan aritmatika:
       </div>
 
       <div class="equation">
@@ -238,7 +238,7 @@
 
       const VISIBLE = 8;
 
-      const result = [];
+      let result = [];
       let startIndex = 0;
 
       const render = () => {
@@ -276,9 +276,11 @@
       };
 
       btnCount.addEventListener("click", () => {
+        result = [];
+        
         const valueA = Number(inputA.value);
         const valueB = Number(inputB.value);
-        const valueN = Number(inputN.value)
+        const valueN = Number(inputN.value);
 
         if (valueA == 0 || valueB == 0 || valueN == 0) {
           return alert("Tidak boleh diisi 0");
