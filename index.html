@@ -166,7 +166,7 @@
   <body>
     <div class="container">
       <div class="title">
-        Tentukan suku pertama (<i>a</i>) dan beda (<i>b</i>) untuk barisan
+        Tentukan suku pertama (<i>a</i>), beda (<i>b</i>) dan jumlah suku (<i>n</i>) untuk barisan
         aritmatika:
       </div>
 
@@ -179,6 +179,11 @@
         <label>
           <i>b</i> =
           <input id="inputB" class="equation-input" value="0" type="number" />
+        </label>
+
+        <label>
+          <i>n</i> =
+          <input id="inputN" class="equation-input" value="0" type="number" />
         </label>
       </div>
 
@@ -223,6 +228,7 @@
     <script>
       const inputA = document.getElementById("inputA");
       const inputB = document.getElementById("inputB");
+      const inputN = document.getElementById("inputN");
       const btnCount = document.getElementById("btnCount");
       const answerRow = document.getElementById("answerRow");
       const terms = answerRow.querySelectorAll(".term");
@@ -230,7 +236,6 @@
       const btnBack = document.getElementById("back");
       const btnNext = document.getElementById("next");
 
-      const TOTAL = 25;
       const VISIBLE = 8;
 
       const result = [];
@@ -273,12 +278,13 @@
       btnCount.addEventListener("click", () => {
         const valueA = Number(inputA.value);
         const valueB = Number(inputB.value);
+        const valueN = Number(inputN.value)
 
-        if (valueA == 0 || valueB == 0) {
+        if (valueA == 0 || valueB == 0 || valueN == 0) {
           return alert("Tidak boleh diisi 0");
         }
 
-        for (let i = 1; i <= 25; i++) {
+        for (let i = 1; i <= valueN; i++) {
           result.push(valueA + (i - 1) * valueB);
         }
 
